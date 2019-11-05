@@ -1,23 +1,36 @@
-PIPENV_RUN := pipenv run
-
-.PHONY: lint test-unit test clean install
+ENV = $(CURDIR)/env
+PIP_INSTALL := $(ENV)/bin/pip install
+DJANGO_ADMIN := $(ENV)/bin/django-admin
+PYTEST := $(ENV)/bin/pytest
+BLACK := $(ENV)/bin/black
+IPYTHON := $(ENV)/bin/ipython
 
 test: test-unit lint
 
-lint:
-	$(PIPENV_RUN) black . --check
+lint: | $(BLACK)
+	$(ENV)/bin/black . --check
 
-test-unit:
-	$(PIPENV_RUN) pytest
+test-unit: | $(PYTEST)
+	$(PYTEST)
 
-fmt:
-	$(PIPENV_RUN) black .
+fmt: | $(BLACK)
+	$(ENV)/bin/black .
 
-start:
-	$(PIPENV_RUN) python manage.py runserver
+start: | $(DJANGO_ADMIN)
+	$(ENV)/bin/python manage.py runserver
 
-install:
-	pipenv install
+shell: | $(DJANGO_ADMIN) $(IPYTHON)
+	$(ENV)/bin/python manage.py shell
+
+env:
+	$(shell which python) -m venv env
+
+$(DJANGO_ADMIN): | env
+	$(PIP_INSTALL) pip --upgrade
+	$(PIP_INSTALL) -r requirements/base.txt
+
+$(IPYTHON) $(PYTEST) $(BLACK): |
+	$(PIP_INSTALL) -r requirements/dev.txt
 
 clean:
-	pipenv rm
+	rm -rf env

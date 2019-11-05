@@ -1,15 +1,20 @@
+PIPENV_RUN := pipenv run
+
 .PHONY: lint test-unit test clean install
 
 test: test-unit lint
 
 lint:
-	pipenv run black . --check
+	$(PIPENV_RUN) black . --check
 
 test-unit:
-	pipenv run pytest
+	$(PIPENV_RUN) pytest
 
 fmt:
-	pipenv run black .
+	$(PIPENV_RUN) black .
+
+start:
+	$(PIPENV_RUN) python manage.py runserver
 
 install:
 	pipenv install

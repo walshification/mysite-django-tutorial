@@ -3,7 +3,6 @@ import datetime
 from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone
-
 from polls.models import Question
 
 

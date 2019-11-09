@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "44a6039db459d36456dbae0670cc9ec57c07c4b3e5e07617f9bd5c864b9e8516"
+            "sha256": "a1f1c9e36cf6f023d7a4948ee65be10498a4e563113dc3e06de3a239874a253c"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -23,9 +23,6 @@
             ],
             "index": "pypi",
             "version": "==2.2.7"
-        },
-        "django-polls": {
-            "path": "./django-polls/dist/django-polls-0.1.tar.gz"
         },
         "pytz": {
             "hashes": [

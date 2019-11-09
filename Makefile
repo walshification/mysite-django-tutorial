@@ -31,6 +31,11 @@ shell: | $(DJANGO_ADMIN) $(IPYTHON)
 $(ENV) init:
 	pipenv install
 
+ci-env:
+	pip install pip --upgrade
+	pip install pipenv
+	pipenv install --dev
+
 $(IPYTHON) $(PYTEST) $(BLACK) $(FLAKE8): | $(ENV)
 	pipenv install --dev
 

@@ -13,7 +13,8 @@ lint: | $(BLACK) $(FLAKE8)
 	pipenv run isort --recursive --check-only .
 
 test-unit: | $(PYTEST)
-	pipenv run pytest .
+	pipenv run pytest --cov
+	pipenv run coverage html
 
 fmt: | $(BLACK)
 	pipenv run isort --recursive .
@@ -22,19 +23,16 @@ fmt: | $(BLACK)
 
 
 start: | $(DJANGO_ADMIN)
-	$(ENV)/bin/python manage.py runserver
+	pipenv run python manage.py runserver
 
 shell: | $(DJANGO_ADMIN) $(IPYTHON)
-	pipenv shell
+	pipenv run python manage.py shell
 
-$(ENV):
+$(ENV) init:
 	pipenv install
 
-$(DJANGO_ADMIN): | env
-	$(PIP_INSTALL) pip --upgrade
-	$(PIP_INSTALL) -r requirements/base.txt
-
 $(IPYTHON) $(PYTEST) $(BLACK) $(FLAKE8): | $(ENV)
+	pipenv install --dev
 
 clean:
 	pipenv --rm

@@ -1,0 +1,23 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+coverage = "*"
+ipython = "*"
+pytest = "~=5.2.1"
+ipdb = ">=0.11"
+black = "==18.9b0"
+pytest-django = "~=3.5.1"
+factory-boy = "~=2.11.1"
+bandit = "~=1.5.1"
+isort = "*"
+flake8 = "*"
+autoflake = "*"
+
+[packages]
+django = "~=2.2"
+
+[requires]
+python_version = "3.6"

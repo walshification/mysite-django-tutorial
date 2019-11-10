@@ -13,7 +13,7 @@ lint: | $(BLACK) $(FLAKE8)
 	pipenv run isort --recursive --check-only .
 
 test-unit: | $(PYTEST)
-	pipenv run pytest --cov
+	pipenv run pytest polls --cov
 	pipenv run coverage html
 
 fmt: | $(BLACK)
